@@ -1,0 +1,276 @@
+//js
+
+//définir chaque joueur et leur attacher un signe
+//ajouter le signe dans la case cliquée
+//permuter de joueur (et donc de signe)
+//définir si la case cliquée contient déjà un signe
+//définir les conditions de victoire (verifier si une ligne est complète)
+//incrémentation du nombre de point en cas de victoire
+//avoir un ami(ou une ia parce que sérieux qui veux jouer au morpion? vient on va jouer aux échecs)
+//un timer du temps de jeu
+//un compteur de coups
+//une fonction rejouer (=/= reset)
+//class joueur extends j1 et j2 ?
+//factoriser le dur en poo
+
+
+
+let i = 0;
+const cases = document.querySelectorAll('.game-item');
+
+function jouer(event){
+    if (!event.target.innerHTML){ 
+        event.target.innerHTML = tour();
+    }
+    isGagner();
+}
+
+function tour() {
+    i++;
+    return i% 2 === 0 ? 'O' : 'X';
+}
+
+function afficherGagnant(player) {
+    console.log ('Gagné ' + player)
+}
+
+function reset(){
+
+}
+
+function isGagner() {
+//
+    if (cases [0].innerHTML!== '' && cases[0].innerHTML === cases[1].innerHTML && 
+    cases[1].innerHTML === cases[2].innerHTML) {
+        afficherGagnant(cases[0].innerHTML);
+    }
+    else if (cases[3].innerHTML!== '' && cases[3].
+            innerHTML === cases[4].innerHTML && cases[4].
+            innerHTML=== cases[4].innerHTML) {
+                afficherGagnant(cases[0].innerHTML);
+            }
+    else if (cases[6].innerHTML!== '' && cases[6].
+            innerHTML === cases[7].innerHTML && cases[7].
+            innerHTML=== cases[8].innerHTML) {
+                afficherGagnant(cases[6].innerHTML);
+            }
+//
+    else if (cases[0].innerHTML !== '' &&
+            cases[0].innerHTML === cases[4].innerHTML &&
+            cases[4].innerHTML=== cases[8].innerHTML) {
+                afficherGagnant(cases[0].innerHTML);
+            }
+            
+    else if (cases[2].innerHTML!== '' && cases[2].
+            innerHTML === cases[4].innerHTML && cases[4].
+            innerHTML=== cases[6].innerHTML) {
+                afficherGagnant(cases[2].innerHTML);
+            }
+//
+else if (cases[0].innerHTML!== '' && cases[0].
+            innerHTML === cases[3].innerHTML && cases[3].
+            innerHTML=== cases[6].innerHTML) {
+                afficherGagnant(cases[0].innerHTML);
+            }
+else if (cases[1].innerHTML!== '' && cases[1].
+            innerHTML === cases[4].innerHTML && cases[4].
+            innerHTML=== cases[7].innerHTML) {
+                afficherGagnant(cases[1].innerHTML);
+            }
+else if (cases[2].innerHTML!== '' && cases[2].
+            innerHTML === cases[5].innerHTML && cases[5].
+            innerHTML=== cases[4].innerHTML) {
+                afficherGagnant(cases[0].innerHTML);
+            }
+}
+
+function start(){
+    cases.forEach(el => el.addEventListener('click', function(event){
+        jouer(event)
+    }));
+}
+
+start();
+
+
+
+//functiO'clock
+// function startTime() {
+//     var today = new Date();
+//     var h = today.getHours();
+//     var m = today.getMinutes();
+//     var s = today.getSeconds();
+//     m = checkTime(m);
+//     s = checkTime(s);
+//     document.getElementById('txt').innerHTML =
+//     h + ":" + m + ":" + s;
+//     var t = setTimeout(startTime, 500);
+//   }
+//   function checkTime(i) {
+//     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+//     return i;
+//   }
+// //fin functionO'clock
+
+// //be kind, replay
+// function Initialisation() {
+//     document.getElementById("replay").style.visibility = "hidden";
+//     joueurs = ['X', 'O'];
+//     joueur = joueurs[0];
+//};
+//fin function be kind, replay
+
+//become human !
+// var tableau = [];
+// const limiteBoucle = 10;
+ 
+// function adversaire(id) {
+ 
+//     var bool = true;
+//     var compteur = 0;
+ 
+//     tableau.push(id);
+ 
+//     while (bool == true && compteur < limiteBoucle) {
+ 
+//     	compteur++;
+ 
+//         var nb = Math.floor(Math.random() * 9);
+ 
+//         var caseAdversaire = 'case'+nb;
+ 
+//         if (-1 === tableau.indexOf(caseAdversaire)) {
+//         	document.getElementById(caseAdversaire).innerHTML = 'O';
+//         	bool = false;
+//         }
+ 
+//     }
+ 
+//     if (limiteBoucle === compteur) {
+//     	console.log("fin de la partie");
+//     } else {
+//     	tableau.push(caseAdversaire);
+//     }
+ 
+// }
+//fin function become human
+
+//html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Morpion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body >
+<header>
+    <h1>Morback le morpion</h1>
+</header>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <span class="game-title" id="message">Le joueur X commence</span>
+            <div class="game">
+                <div class="game-item" data-case="1"></div>
+                <div class="game-item" data-case="2"></div>
+                <div class="game-item" data-case="3"></div>
+
+                <div class="game-item" data-case="4"></div>
+                <div class="game-item" data-case="5"></div>
+                <div class="game-item" data-case="6"></div>
+
+                <div class="game-item" data-case="7"></div>
+                <div class="game-item" data-case="8"></div>
+                <div class="game-item" data-case="9"></div>
+            </div>
+            <button id="reset-game" class="btn btn-primary">reset</button>
+            <!-- <button type="button" class="bouton" onclick="Initialisation();">Rejouer</button> -->
+        </div>
+    </div>
+</section>
+<script src="fonction.js"></script>
+</body>
+</html>
+
+
+
+//css
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+h1{
+    text-align: center;
+}
+
+.game-title {
+    display: block;
+    margin-bottom: 30px;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.game {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 302px;
+    margin: 0 auto 50px;
+    border: 1px solid #000;
+}
+
+.game-item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    line-height: 48px;
+    border: 1px solid #000;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    transition: all linear 0.3s;
+}
+
+.game-item:hover {
+    background-color: #ccc;
+}
+
+.game-item.O {
+    background-color: #abfdab;
+}
+
+.game-item.X {
+    background-color: #f99;
+}
+
+#reset-game {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all linear 0.3s;
+}
+#reset-game:hover {
+    background-color: #ccc;
+    color: #0069D9;
+}
+
+#replay {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all linear 0.3s;
+}
+#replay:hover {
+    background-color: #ccc;
+    color: #0069D9;
+}
